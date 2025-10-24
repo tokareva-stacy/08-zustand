@@ -1,4 +1,18 @@
+import { Metadata } from "next";
 import css from "./Home.module.css";
+
+export const metadata: Metadata = {
+  title: "Not Found",
+  description: "No such page exists",
+  openGraph: {
+    title: "Not Found",
+    description: "No such page exists",
+    url: "https://08-zustand-blush-beta.vercel.app",
+    images: [
+      { url: "https://ac.goit.global/fullstack/react/notehub-og-meta.jpg" },
+    ],
+  },
+};
 
 export default function NotFound() {
   return (

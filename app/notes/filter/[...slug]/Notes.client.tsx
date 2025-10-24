@@ -1,17 +1,15 @@
 "use client";
 
 import ErrorMessage from "@/components/ErrorMessage/ErrorMessage";
-import Modal from "@/components/Modal/Modal";
-import NoteForm from "@/components/NoteForm/NoteForm";
 import NoteList from "@/components/NoteList/NoteList";
 import Pagination from "@/components/Pagination/Pagination";
 import SearchBox from "@/components/SearchBox/SearchBox";
 import { fetchNotes } from "@/lib/api";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { useState } from "react";
-import { Toaster } from "react-hot-toast";
 import { useDebouncedCallback } from "use-debounce";
 import css from "./NotesPage.module.css";
+import { useRouter } from "next/navigation";
 
 interface NotesClientProps {
   category?: string;
@@ -20,7 +18,7 @@ interface NotesClientProps {
 export default function NotesClient({ category }: NotesClientProps) {
   const [topic, setTopic] = useState("");
   const [page, setPage] = useState(1);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const router = useRouter();
 
   const { data, isError, isSuccess } = useQuery({
     queryKey: ["notes", topic, page, category],
@@ -31,12 +29,8 @@ export default function NotesClient({ category }: NotesClientProps) {
 
   const totalPages = data?.totalPages ?? 0;
 
-  function openModal() {
-    setIsModalOpen(true);
-  }
-
-  function closeModal() {
-    setIsModalOpen(false);
+  function onClickCreated() {
+    router.push("/notes/action/create");
   }
 
   const updateSearchWord = useDebouncedCallback((searchWord: string) => {
@@ -55,7 +49,7 @@ export default function NotesClient({ category }: NotesClientProps) {
             updatePage={setPage}
           />
         )}
-        <button className={css.button} onClick={openModal}>
+        <button className={css.button} onClick={onClickCreated}>
           Create note +
         </button>
       </header>
@@ -68,12 +62,6 @@ export default function NotesClient({ category }: NotesClientProps) {
       {data !== undefined && data?.notes.length > 0 && (
         <NoteList notes={data?.notes} />
       )}
-      {isModalOpen && (
-        <Modal onClose={closeModal}>
-          <NoteForm onClose={closeModal} />
-        </Modal>
-      )}
-      <Toaster />
     </div>
   );
 }
