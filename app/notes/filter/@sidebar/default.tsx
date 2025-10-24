@@ -1,4 +1,3 @@
-import React from "react";
 import Link from "next/link";
 import css from "./SidebarNotes.module.css";
 
@@ -6,25 +5,25 @@ const tags = ["Todo", "Work", "Personal", "Meeting", "Shopping"];
 
 export default function SidebarNotes() {
   return (
-    <aside className={css.sidebar}>
-      <ul className={css.menuList}>
-        <li className={css.menuItem}>
-          <Link href={`/notes/filter/all`} className={css.menuLink}>
-            All notes
-          </Link>
-        </li>
-
-        {tags.map((tag) => (
+    <ul className={css.menuList}>
+      <li className={css.menuItem}>
+        <Link href={`/notes/filter/All`} className={css.menuLink}>
+          All
+        </Link>
+      </li>
+      {tags.map((tag) => {
+        return (
           <li className={css.menuItem} key={tag}>
             <Link
-              href={`/notes/filter/${encodeURIComponent(tag)}`}
+              href={`/notes/filter/${tag}`}
               className={css.menuLink}
+              key={tag}
             >
               {tag}
             </Link>
           </li>
-        ))}
-      </ul>
-    </aside>
+        );
+      })}
+    </ul>
   );
 }
