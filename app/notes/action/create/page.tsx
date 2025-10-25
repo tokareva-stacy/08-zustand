@@ -1,16 +1,16 @@
-import NoteForm from '@/components/NoteForm/NoteForm';
-import css from './CreateNote.module.css';
-import { Metadata } from 'next';
+import NoteForm from "@/components/NoteForm/NoteForm";
+import css from "./CreateNote.module.css";
+import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'Create Note',
-  description: 'Create your note.',
+  title: "Create Note",
+  description: "Create your note.",
   openGraph: {
-    title: 'Create Note',
-    description: 'Create your note',
-    url: 'https://https://08-zustand-orcin-six.vercel.app//notes/action/create',
+    title: "Create Note",
+    description: "Create your note",
+    url: "https://https://08-zustand-orcin-six.vercel.app/notes/action/create",
     images: [
-      { url: 'https://ac.goit.global/fullstack/react/notehub-og-meta.jpg' },
+      { url: "https://ac.goit.global/fullstack/react/notehub-og-meta.jpg" },
     ],
   },
 };
